@@ -79,12 +79,12 @@ function decryptData(encryptedData) {
     }
 }
 
-// Servir arquivos estáticos da pasta dist
-app.use(express.static(path.join(__dirname, '..')));
+// Servir arquivos estáticos
+app.use(express.static(path.join(__dirname, '..', 'dist')));
 
 // Rota principal
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'index.html'));
+    res.sendFile(path.join(__dirname, '..', 'dist', 'index.html'));
 });
 
 // Rota para arquivos estáticos não encontrados
@@ -96,7 +96,7 @@ app.use((req, res, next) => {
 });
 
 // Caminho para o arquivo de estatísticas
-const statsFilePath = path.join(__dirname, '../stats.json');
+const statsFilePath = path.join(__dirname, '..', 'stats.json');
 
 // Set para armazenar IPs únicos
 const uniqueIPs = new Set();
