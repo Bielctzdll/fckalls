@@ -1,4 +1,23 @@
+// Função para encriptar dados
+function encryptData(data) {
+    return CryptoJS.AES.encrypt(JSON.stringify(data), 'bielzin_secure_key_2025').toString();
+}
+
+// Função para decriptar dados
+function decryptData(encryptedData) {
+    const bytes = CryptoJS.AES.decrypt(encryptedData, 'bielzin_secure_key_2025');
+    return JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+    // Anti-debug
+    setInterval(() => {
+        function debug() {
+            debugger;
+        }
+        debug();
+    }, 100);
+
     // Detecta se é um dispositivo móvel
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
@@ -232,6 +251,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 300);
     });
 
+    // WebSocket Connection
+    const ws = new WebSocket(`ws://${window.location.hostname}:3000`);
+
+    ws.onmessage = (event) => {
+        try {
+            const decryptedStats = decryptData(event.data);
+            document.getElementById('downloadCount').textContent = decryptedStats.downloads;
+            document.getElementById('activeUsers').textContent = decryptedStats.activeUsers;
+        } catch (error) {
+            console.error('Erro ao processar mensagem');
+        }
+    };
+
     // Adicionar evento de download aos botões
     document.querySelectorAll('.download-btn').forEach(button => {
         if (button.tagName === 'A') {
@@ -241,24 +273,19 @@ document.addEventListener('DOMContentLoaded', () => {
             button.addEventListener(startEvent, async (e) => {
                 e.preventDefault();
                 
-                // Adiciona classe de loading
                 button.classList.add('loading');
                 
-                // Simula um pequeno delay para mostrar o loading
                 await new Promise(resolve => setTimeout(resolve, 1500));
                 
-                // Remove loading e mostra sucesso
                 button.classList.remove('loading');
                 button.classList.add('success');
                 
-                // Envia evento para o WebSocket
-                ws.send(JSON.stringify({ type: 'download' }));
+                const encryptedMessage = encryptData({ type: 'download' });
+                ws.send(encryptedMessage);
                 
-                // Após mostrar o sucesso, inicia o download
                 setTimeout(() => {
                     window.location.href = originalHref;
                     
-                    // Remove a classe de sucesso após 1 segundo
                     setTimeout(() => {
                         button.classList.remove('success');
                     }, 1000);
@@ -266,15 +293,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
     });
-
-    // WebSocket Connection
-    const ws = new WebSocket(`ws://${window.location.hostname}:3000`);
-
-    ws.onmessage = (event) => {
-        const stats = JSON.parse(event.data);
-        document.getElementById('downloadCount').textContent = stats.downloads;
-        document.getElementById('activeUsers').textContent = stats.activeUsers;
-    };
 
     // Slider de Downloads (apenas para desktop)
     if (!isMobile) {

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline';">
+    <link rel="icon" href="data:,">
+    <title>Bielzin's Profile</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"></script>
+</head>
+<body>
+    <!-- Initial Loading Screen -->
+    <div class="loading-screen">
+        <div class="loading-content">
+            <p class="developer">Desenvolvido por Bielzin</p>
+            <p class="click-anywhere">Click anywhere on the screen to enter the site</p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content hidden">
+        <!-- Profile Card -->
+        <div class="card">
+            <div class="profile-image">
+                <img src="7912f64df57df1efc9e2ea2bb7433676.jpg" alt="Profile Picture">
+            </div>
+            <div class="profile-info">
+                <h1>Bielzin</h1>
+                <p class="description">f*ck everyone</p>
+                <div class="social-links">
+
+                    <a href="#" class="settings-link">
+                        <img src="engrenagem.png" alt="Settings">
+                    </a>
+                    <a href="#" class="tools-link">
+                        <img src="ferramentas.png" alt="Tools">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Profile Image Modal -->
+    <div class="profile-modal hidden">
+        <div class="modal-content">
+            <div class="modal-image-container">
+                <img src="7912f64df57df1efc9e2ea2bb7433676.jpg" alt="Profile Picture" class="modal-image">
+                <div class="glow-effect"></div>
+            </div>
+            <button class="close-modal">×</button>
+        </div>
+    </div>
+
+    <!-- Tools Section -->
+    <div class="tools-section hidden">
+        <div class="tools-container">
+            <h2>Configurações do Site</h2>
+            <div class="tools-content">
+                <div class="settings-group">
+                    <h3>Tema</h3>
+                    <div class="theme-options">
+                        <button class="theme-btn active" data-theme="dark">Dark</button>
+                        <button class="theme-btn" data-theme="darker">Darker</button>
+                        <button class="theme-btn" data-theme="neon">Neon</button>
+                        <button class="theme-btn" data-theme="matrix">Matrix</button>
+                    </div>
+                </div>
+                
+                <div class="settings-group">
+                    <h3>Efeitos Visuais</h3>
+                    <div class="effects-toggles">
+                        <div class="toggle-item">
+                            <label class="switch">
+                                <input type="checkbox" id="animationsToggle" checked>
+                                <span class="slider"></span>
+                            </label>
+                            <span>Animações</span>
+                        </div>
+                        <div class="toggle-item">
+                            <label class="switch">
+                                <input type="checkbox" id="blurToggle" checked>
+                                <span class="slider"></span>
+                            </label>
+                            <span>Efeito Blur</span>
+                        </div>
+                        <div class="toggle-item">
+                            <label class="switch">
+                                <input type="checkbox" id="musicToggle" checked>
+                                <span class="slider"></span>
+                            </label>
+                            <span>Música de Fundo</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="settings-group">
+                    <h3>Volume</h3>
+                    <div class="volume-control">
+                        <input type="range" id="volumeSlider" min="0" max="100" value="50">
+                        <span id="volumeValue">50%</span>
+                    </div>
+                </div>
+
+                <div class="settings-group about-section">
+                    <h3>Sobre</h3>
+                    <div class="about-content">
+                        <div class="about-header">
+                            <img src="7912f64df57df1efc9e2ea2bb7433676.jpg" alt="Bielzin" class="about-avatar">
+                            <div class="about-title">
+                                <h4>Bielzin's Hub</h4>
+                                <span class="version">v1.0.0</span>
+                            </div>
+                        </div>
+                        <p class="about-description">
+                            Hub de downloads e ferramentas desenvolvido por Bielzin. 
+                            Este site oferece uma coleção curada de recursos e hacks para jogos, 
+                            com uma interface moderna e personalizável.
+                        </p>
+                        <div class="about-stats">
+                            <div class="stat-item">
+                                <span class="stat-value" id="downloadCount">0</span>
+                                <span class="stat-label">Downloads</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-value" id="activeUsers">0</span>
+                                <span class="stat-label">Usuários</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="credits">
+                    <p>Desenvolvido com 💜 por Bielzin</p>
+                    <span class="copyright">© 2025 Todos os direitos reservados</span>
+                </div>
+            </div>
+            <button class="close-tools">×</button>
+        </div>
+    </div>
+
+    <!-- Downloads Section -->
+    <div class="downloads-section hidden">
+        <div class="downloads-container">
+            <h2>Downloads</h2>
+            <div class="downloads-wrapper">
+                <div class="downloads-grid">
+                    <!-- Download Card 1 -->
+                    <div class="download-card">
+                        <div class="download-icon">🎮</div>
+                        <h3>HB UNIVERSAL</h3>
+                        <p>(RECOMENDADO PARA SKYWARS - ROBLOX)</p>
+                        <a href="https://download1335.mediafire.com/g4mhdt5qategtHMiPm2ERjmoPQe7E955-FO4r0ijSGEETsxfeJyTggS7cfIsn8wFwNgD-sGE1fFABY1eGvJckHKNZvT8xB0gkUF7AjSOTqOqOgbN4zNaSauQ_y4jLgOJuyFHTdKqsPYV6Xm554aU7CJYlQh23kVtdLgitMCiUeLzLw/vexkq016748p1a7/message.txt" target="_blank" class="download-btn">Download</a>
+                    </div>
+                    
+                    <!-- Download Card 2 -->
+                    <div class="download-card">
+                        <div class="download-icon">🎮</div>
+                        <h3>HB UNIVERSAL V2</h3>
+                        <p>(VERSÃO ATUALIZADA - ROBLOX)</p>
+                        <button class="download-btn">Em Breve</button>
+                    </div>
+                    
+                    <!-- Download Card 3 -->
+                    <div class="download-card">
+                        <div class="download-icon">🎮</div>
+                        <h3>AIMBOT</h3>
+                        <p>(MIRA AUTOMÁTICA - ROBLOX)</p>
+                        <button class="download-btn">Em Breve</button>
+                    </div>
+
+                    <!-- Download Card 4 -->
+                    <div class="download-card">
+                        <div class="download-icon">🎮</div>
+                        <h3>ESP HACK</h3>
+                        <p>(WALLHACK - ROBLOX)</p>
+                        <button class="download-btn">Em Breve</button>
+                    </div>
+
+                    <!-- Download Card 5 -->
+                    <div class="download-card">
+                        <div class="download-icon">🎮</div>
+                        <h3>SPEED HACK</h3>
+                        <p>(SUPER VELOCIDADE - ROBLOX)</p>
+                        <button class="download-btn">Em Breve</button>
+                    </div>
+
+                    <!-- Download Card 6 -->
+                    <div class="download-card">
+                        <div class="download-icon">🎮</div>
+                        <h3>INFINITE JUMP</h3>
+                        <p>(PULO INFINITO - ROBLOX)</p>
+                        <button class="download-btn">Em Breve</button>
+                    </div>
+
+                    <!-- Download Card 7 -->
+                    <div class="download-card">
+                        <div class="download-icon">🎮</div>
+                        <h3>FLY HACK</h3>
+                        <p>(VOAR - ROBLOX)</p>
+                        <button class="download-btn">Em Breve</button>
+                    </div>
+
+                    <!-- Download Card 8 -->
+                    <div class="download-card">
+                        <div class="download-icon">🎮</div>
+                        <h3>NOCLIP</h3>
+                        <p>(ATRAVESSAR PAREDES - ROBLOX)</p>
+                        <button class="download-btn">Em Breve</button>
+                    </div>
+
+                    <!-- Download Card 9 -->
+                    <div class="download-card">
+                        <div class="download-icon">🎮</div>
+                        <h3>TELEPORT</h3>
+                        <p>(TELETRANSPORTE - ROBLOX)</p>
+                        <button class="download-btn">Em Breve</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Slider Navigation -->
+            <div class="slider-nav prev"></div>
+            <div class="slider-nav next"></div>
+            <button class="close-downloads">×</button>
+        </div>
+    </div>
+
+    <!-- Notificação Principal -->
+    <div class="main-notification">
+        <p>O site foi desenvolvido e criado por bielzin! 🚀<br>
+        Ainda está em desenvolvimento, esta é apenas uma versão beta v1</p>
+    </div>
+
+    <!-- Notificações do Canto -->
+    <div class="corner-notification" id="version-notification">
+        Versão Beta v1 🚀
+    </div>
+    <div class="corner-notification" id="downloads-notification">
+        Mais downloads disponíveis em breve! 📦
+    </div>
+
+    <!-- Loading Modal -->
+    <div class="loading-modal">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div class="confirm-modal">
+        <div class="confirm-content">
+            <h3>Versão Premium</h3>
+            <p>Você quer adquirir a versão premium?</p>
+            <div class="confirm-buttons">
+                <button class="confirm-btn cancel">Cancelar</button>
+                <button class="confirm-btn confirm">Confirmar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Audio Player -->
+    <audio id="bgMusic" loop>
+        <source src="King of the Kill (2013 Version).mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Our Scripts -->
+    <script src="script.min.js"></script>
+</body>
+</html> 
