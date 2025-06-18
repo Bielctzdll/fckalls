@@ -1,4 +1,3 @@
-require('dotenv').config();
 const WebSocket = require('ws');
 const http = require('http');
 const express = require('express');
@@ -11,7 +10,7 @@ const CryptoJS = require('crypto-js');
 // Configurações
 const CONFIG = {
     PORT: process.env.PORT || 3000,
-    ENCRYPTION_KEY: 'bielzin_secure_key_2025',
+    ENCRYPTION_KEY: process.env.ENCRYPTION_KEY || 'bielzin_secure_key_2025',
     RATE_LIMIT_WINDOW: process.env.RATE_LIMIT_WINDOW || 15,
     RATE_LIMIT_MAX: process.env.RATE_LIMIT_MAX || 100
 };
